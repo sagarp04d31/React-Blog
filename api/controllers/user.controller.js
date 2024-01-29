@@ -1,17 +1,19 @@
 const User = require("../models/users.models.js");
 const bcrypt = require("bcryptjs");
+const errorHandler = require("../utils/error.js");
 
 function sayHello(req, res) {
   res.send("From New Router");
 }
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   const hashPass = bcrypt.hashSync(password, 10);
 
   if(!username || !email || !password || username === '' || email === '' || password === '') {
-    res.json({message: "Fields Empty"})
+    // res.status(400).json({message: "Fields Empty"});
+    next(errorHandler(400, "Fields Empty"));
   }
 
   const user = new User({
@@ -29,7 +31,8 @@ const signup = async (req, res) => {
       hashPass,
     })
   } catch(error) {
-    res.status(500).json({message: error.message})
+    next(error);
+    // res.status(500).json({message: error.message})
   }
 }
 
