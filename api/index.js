@@ -1,29 +1,11 @@
+require("./utils/db.config.js");
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const { User } = require('./models/users.js')
-const dotenv = require('dotenv');
-dotenv.config();
+const authRouter = require("./routers/auth.router.js");
 
-// Required Database Connection
+app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(
-    console.log("MongoDB is Connected")
-  )
-  .catch((err) => {
-    console.log(err);
-  })
-
-const sayHello = (req, res, next) => {
-  res.json({
-    name: "Sagar Poudel",
-    address: "Butwal"
-  })
-}
-
-app.get("/", sayHello);
+app.use("/api/", authRouter);
 
 app.listen(3000, () => {
   console.log("Server is Running");

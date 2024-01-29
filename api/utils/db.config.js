@@ -1,2 +1,12 @@
-const db_url = "mongodb://localhost:27017/Blog";
-mongoose.connect(db_url);
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
+
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(
+    console.log("MongoDB is Connected")
+  )
+  .catch((err) => {
+    console.log(err);
+  })
