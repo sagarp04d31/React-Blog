@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { sayHello, signup } = require("../controllers/user.controller.js");
 
-router.route("/")
+router.route("/signup")
   .get(sayHello)
   .post(signup)
 
