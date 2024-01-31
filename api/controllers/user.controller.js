@@ -53,7 +53,7 @@ const signin = async (req, res, next) => {
   const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET)
   const {password: pass, ...rest} = validUser._doc;
   res
-    .status(400)
+    .status(200)
     .cookie('access-token', token, {
       httpOnly: true,
     })
