@@ -5,9 +5,9 @@ import {
   Button,
   Alert
 } from 'flowbite-react';
-
-import { useNavigate } from 'react-router-dom';
+import OAuth from './OAuth.jsx';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice.js';
 
@@ -92,10 +92,11 @@ function Signin() {
               ) : 'Sign In'
             }
           </Button>
+          <OAuth />
         </form>
         {
           errorMessage &&
-          <Alert className="bg-red-400 text-black font-mono mt-5">
+          <Alert className="bg-red-400 text-black font-mono mt-5 text">
             { errorMessage }
           </Alert>
         }
