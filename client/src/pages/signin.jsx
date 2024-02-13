@@ -7,6 +7,7 @@ import {
 } from 'flowbite-react';
 import OAuth from './OAuth.jsx';
 import { useState } from 'react';
+import Header from "../pages/header.jsx";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice.js';
@@ -51,55 +52,58 @@ function Signin() {
   }
 
   return(
-    <div className="mt-10 p-5">
-      <div>
-        <span className="text-4xl">
-          My Blog
-        </span>
-      </div>
-      <div className="mt-6">
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <Label 
-            value="Email"
-            className="text-xl"
-          />
-          <TextInput 
-            type="text"
-            placeholder="Email"
-            id="email"
-            onChange={handleChange}
-          />
-          <Label 
-            value="Password"
-            className="text-xl"
-          />
-          <TextInput 
-            type="text"
-            placeholder="**************"
-            id="password"
-            onChange={handleChange}
-          />
-          <Button 
-            type="submit"
-            disabled={loading}
-          >
-            {
-              loading ? (
-                <>
-                  <Spinner size="20" />
-                  <span> Loading... </span>
-                </>
-              ) : 'Sign In'
-            }
-          </Button>
-          <OAuth />
-        </form>
-        {
-          errorMessage &&
-          <Alert className="bg-red-400 text-black font-mono mt-5 text">
-            { errorMessage }
-          </Alert>
-        }
+    <div>
+      <Header />
+      <div className="mt-10 p-5">
+        <div>
+          <span className="text-4xl">
+            My Blog
+          </span>
+        </div>
+        <div className="mt-6">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <Label 
+              value="Email"
+              className="text-xl"
+            />
+            <TextInput 
+              type="text"
+              placeholder="Email"
+              id="email"
+              onChange={handleChange}
+            />
+            <Label 
+              value="Password"
+              className="text-xl"
+            />
+            <TextInput 
+              type="text"
+              placeholder="**************"
+              id="password"
+              onChange={handleChange}
+            />
+            <Button 
+              type="submit"
+              disabled={loading}
+            >
+              {
+                loading ? (
+                  <>
+                    <Spinner size="20" />
+                    <span> Loading... </span>
+                  </>
+                ) : 'Sign In'
+              }
+            </Button>
+            <OAuth />
+          </form>
+          {
+            errorMessage &&
+            <Alert className="bg-red-400 text-black font-mono mt-5 text">
+              { errorMessage }
+            </Alert>
+          }
+        </div>
       </div>
     </div>
   )

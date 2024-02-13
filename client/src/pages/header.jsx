@@ -6,11 +6,14 @@ import {
   Avatar
 } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IoMdSearch } from 'react-icons/io';
+import { toggleTheme } from '../redux/theme/themeSlice.js';
 
 function Header() {
-  const { currentUser } = useSelector((state) => state.user)
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
 
   return(
     <Navbar className="border border-cyan">
@@ -26,36 +29,41 @@ function Header() {
           rightIcon={IoMdSearch}
         />
       </form>
-        {
-          currentUser ? 
-          (
-            <Dropdown
-              arrowIcon={false}
-              inline
-              label={
-                <Avatar alt='user' img={currentUser.profilePicture} rounded />
-              }
-            >
+      <Button
+        onClick={() => dispatch(toggleTheme())}
+      >
+        { theme === 'light' ? "Light" : "Dark" }
+      </Button>
+      {
+        currentUser ? 
+        (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt='user' img={currentUser.profilePicture} rounded/>
+            }
+          >
 
-              <Dropdown.Header>
-                <span> {currentUser.username} </span>
-              </Dropdown.Header>
-              <Dropdown.Item>
-                Profile
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item>
-                Sign Out
-              </Dropdown.Item>
+            <Dropdown.Header>
+              <span> {currentUser.username} </span>
+            </Dropdown.Header>
+            <Dropdown.Item>
+              Profile
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>
+              Sign Out
+            </Dropdown.Item>
 
-            </Dropdown>
-          ) :
-          (
-            <Button>
-              Sign In
-            </Button>
-          )
-        }
+          </Dropdown>
+        ) :
+        (
+          <Button>
+            Sign In
+          </Button>
+        )
+      }
     </Navbar>
   )
 }
