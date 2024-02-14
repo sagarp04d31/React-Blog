@@ -17,7 +17,7 @@ function Dashboard() {
 
   return(
     <div className="flex flex-col md:flex-row min-h-screen">
-      <div className="md:w-56">
+      <div>
         <DashboardSidebar />
       </div>
       {tab === 'profile' && <DashboardProfile />}
