@@ -7,7 +7,6 @@ import {
 } from 'flowbite-react';
 import OAuth from './OAuth.jsx';
 import { useState } from 'react';
-import Header from "../pages/header.jsx";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice.js';
@@ -53,7 +52,6 @@ function Signin() {
 
   return(
     <div>
-      <Header />
       <div className="mt-10 p-5">
         <div>
           <span className="text-4xl">
