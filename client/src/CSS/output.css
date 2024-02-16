@@ -2189,11 +2189,6 @@ input:checked + .toggle-bg {
   border-color: rgb(224 36 36 / var(--tw-border-opacity));
 }
 
-.border-red-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(200 30 30 / var(--tw-border-opacity));
-}
-
 .border-red-900 {
   --tw-border-opacity: 1;
   border-color: rgb(119 29 29 / var(--tw-border-opacity));
@@ -2911,10 +2906,6 @@ input:checked + .toggle-bg {
 
 .text-center {
   text-align: center;
-}
-
-.align-middle {
-  vertical-align: middle;
 }
 
 .font-mono {
@@ -5672,10 +5663,6 @@ input:checked + .toggle-bg {
 
   .md\:w-48 {
     width: 12rem;
-  }
-
-  .md\:w-56 {
-    width: 14rem;
   }
 
   .md\:w-auto {
