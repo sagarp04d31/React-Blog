@@ -6,8 +6,13 @@ import {
 } from 'firebase/storage';
 import app from "../firebase.js";
 import { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { TextInput, Button } from "flowbite-react";
+import {
+  updateStart,
+  updateSuccess,
+  updateFailure,
+} from '../redux/user/userSlice.js';
 
 function DashboardProfile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -15,6 +20,11 @@ function DashboardProfile() {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploading, setImageFileUploading] = useState(false);
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+  const [updateUserError, setUpdateUserError] = useState(null);
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState(null);
   const filePickerRef = useRef();
 
   const handleImageChange = (e) => {
@@ -61,6 +71,46 @@ function DashboardProfile() {
     );
   };
 
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setUpdateUserError(null);
+    setUpdateUserSuccess(null);
+    if (Object.keys(formData).length === 0) {
+      setUpdateUserError('No changes made');
+      return;
+    }
+    if (imageFileUploading) {
+      setUpdateUserError('Please wait for image to upload');
+      return;
+    }
+    try {
+      dispatch(updateStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(updateFailure(data.message));
+        setUpdateUserError(data.message);
+      } else {
+        dispatch(updateSuccess(data));
+        setUpdateUserSuccess("User's profile updated successfully");
+      }
+    } catch (error) {
+      dispatch(updateFailure(error.message));
+      setUpdateUserError(error.message);
+    }
+  }
+
   return(
     <div className="flex flex-col gap-4 mx-auto w-1/2 my-10 font-mono text-2xl">
       <input 
@@ -78,21 +128,28 @@ function DashboardProfile() {
       {imageFileUploadError && (
         <Alert color='failure'>{imageFileUploadError}</Alert>
       )}
-      <form className="flex flex-col gap-4 w-full">
+      <form 
+        className="flex flex-col gap-4 w-full" 
+        onSubmit={handleSubmit}
+      >
         <TextInput 
           id="username"
           placeholder="username" 
           defaultValue={currentUser.username}
+          onChange={handleChange}
         />
         <TextInput 
           id="email"
           placeholder="email" 
           defaultValue={currentUser.email}
+          onChange={handleChange}
         />
         <TextInput 
           id="password"
-          placeholder="password"/>
-        <Button> Save </Button>
+          placeholder="password"
+          onChange={handleChange}
+        />
+        <Button type="submit"> Save </Button>
       </form>
       <div className="flex flex-row justify-between">
         <span className="text-sm cursor-pointer text-red-600"> Delete </span>
