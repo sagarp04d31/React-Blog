@@ -7,25 +7,31 @@ import {
 import app from "../firebase.js";
 import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TextInput, Button } from "flowbite-react";
+import { TextInput, Button, Modal, Alert } from "flowbite-react";
 import {
   updateStart,
   updateSuccess,
   updateFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from '../redux/user/userSlice.js';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 function DashboardProfile() {
-  const { currentUser } = useSelector((state) => state.user);
-  const [imageFile, setImageFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
-  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
-  const [imageFileUploadError, setImageFileUploadError] = useState(null);
-  const [imageFileUploading, setImageFileUploading] = useState(false);
-  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
-  const [updateUserError, setUpdateUserError] = useState(null);
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState(null);
   const filePickerRef = useRef();
+  const { currentUser } = useSelector((state) => state.user);
+
+  const [formData, setFormData] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [updateUserError, setUpdateUserError] = useState(null);
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+  const [imageFileUploading, setImageFileUploading] = useState(false);
+  const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -42,6 +48,7 @@ function DashboardProfile() {
   }, [imageFile]);
 
   const uploadImage = async () => {
+    setImageFileUploading(true);
     setImageFileUploadError(null);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
@@ -62,10 +69,12 @@ function DashboardProfile() {
         setImageFileUploadProgress(null);
         setImageFile(null);
         setImageUrl(null);
+        setImageFileUploading(false);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageUrl(downloadURL);
+          setFormData({ ...formData, profilePicture: downloadURL });
         });
       }
     );
@@ -111,6 +120,24 @@ function DashboardProfile() {
     }
   }
 
+  const handleDeleteUser = async () => {
+    setOpenModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
   return(
     <div className="flex flex-col gap-4 mx-auto w-1/2 my-10 font-mono text-2xl">
       <input 
@@ -128,10 +155,7 @@ function DashboardProfile() {
       {imageFileUploadError && (
         <Alert color='failure'>{imageFileUploadError}</Alert>
       )}
-      <form 
-        className="flex flex-col gap-4 w-full" 
-        onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
         <TextInput 
           id="username"
           placeholder="username" 
@@ -152,9 +176,28 @@ function DashboardProfile() {
         <Button type="submit"> Save </Button>
       </form>
       <div className="flex flex-row justify-between">
-        <span className="text-sm cursor-pointer text-red-600"> Delete </span>
+        <span className="text-sm cursor-pointer text-red-600" onClick={() => setOpenModal(true)}> Delete </span>
         <span className="text-sm cursor-pointer"> SignOut </span>
       </div>
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this product?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={ handleDeleteUser }>
+                {"Yes, I'm sure"}
+              </Button>
+              <Button color="gray" onClick={() => setOpenModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }
