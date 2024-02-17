@@ -79,9 +79,11 @@ function Header() {
           </Dropdown>
         ) :
         (
-          <Button>
-            Sign In
-          </Button>
+          <Link to="/signin">
+            <Button>
+              Sign In
+            </Button>
+          </Link>
         )
       }
     </Navbar>
