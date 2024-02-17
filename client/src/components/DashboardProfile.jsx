@@ -15,6 +15,7 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  signoutSuccess,
 } from '../redux/user/userSlice.js';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
@@ -137,6 +138,22 @@ function DashboardProfile() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+  
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/user/signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return(
     <div className="flex flex-col gap-4 mx-auto w-1/2 my-10 font-mono text-2xl">
@@ -177,7 +194,7 @@ function DashboardProfile() {
       </form>
       <div className="flex flex-row justify-between">
         <span className="text-sm cursor-pointer text-red-600" onClick={() => setOpenModal(true)}> Delete </span>
-        <span className="text-sm cursor-pointer"> SignOut </span>
+        <span className="text-sm cursor-pointer" onClick={handleSignout}> SignOut </span>
       </div>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
