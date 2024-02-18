@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const authRouter = require("./routers/auth.router.js");
 const userRouter = require("./routers/user.router.js");
+const postRouter = require("./routers/post.router.js");
 const cookieParser = require('cookie-parser');
 
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
