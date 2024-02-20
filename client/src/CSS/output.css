@@ -5711,6 +5711,10 @@ input:checked + .toggle-bg {
     width: auto;
   }
 
+  .md\:w-56 {
+    width: 14rem;
+  }
+
   .md\:max-w-xl {
     max-width: 36rem;
   }
