@@ -5,6 +5,7 @@ import Header from "./pages/header.jsx";
 import Register from "./pages/register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
+import PostPage from "./pages/PostPage.jsx";
 import UpdatePost from './pages/UpdatePost';
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import OnlyAdminPrivateRoute from "./components/OnlyAdmin.jsx";
@@ -26,6 +27,7 @@ function Routing() {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
+        <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
     </BrowserRouter>
   );
