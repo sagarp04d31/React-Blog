@@ -5,6 +5,7 @@ import Header from "./pages/header.jsx";
 import Register from "./pages/register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
+import UpdatePost from './pages/UpdatePost';
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import OnlyAdminPrivateRoute from "./components/OnlyAdmin.jsx";
 import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
@@ -23,6 +24,7 @@ function Routing() {
         </Route>
         <Route element={<OnlyAdminPrivateRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
       </Routes>
     </BrowserRouter>
