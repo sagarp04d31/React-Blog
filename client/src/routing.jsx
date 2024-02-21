@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
 import PostPage from "./pages/PostPage.jsx";
 import UpdatePost from './pages/UpdatePost';
+import ScrollToTop from './components/ScrollToTop';
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import OnlyAdminPrivateRoute from "./components/OnlyAdmin.jsx";
 import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
@@ -14,6 +15,7 @@ import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
 function Routing() {
   return(
     <BrowserRouter basename="/">
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
