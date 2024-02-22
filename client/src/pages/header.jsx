@@ -34,10 +34,10 @@ function Header() {
   };
 
   return(
-    <Navbar className="border border-cyan">
+    <Navbar className="border border-b-black">
       <Link to="/">
         <span className="text-2xl font-mono hover:text-orange-500">
-          My Blogs
+          Blogs
         </span>
       </Link>
       <form className="flex flex-row">
