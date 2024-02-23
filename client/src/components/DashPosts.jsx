@@ -122,6 +122,7 @@ function DashPosts() {
         onClose={() => setShowModal(false)}
         popup
         size='md'
+        className='font-serif'
       >
         <Modal.Header />
         <Modal.Body>

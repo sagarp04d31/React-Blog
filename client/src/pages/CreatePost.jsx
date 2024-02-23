@@ -91,7 +91,7 @@ function CreatePost() {
   };
 
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <div className='p-3 max-w-3xl mx-auto min-h-screen font-serif'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
@@ -116,7 +116,7 @@ function CreatePost() {
             <option value='nextjs'> Four </option>
           </Select>
         </div>
-        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
+        <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 font-mono'>
           <FileInput 
             type='file' 
             accept='image/*' 
@@ -124,7 +124,6 @@ function CreatePost() {
           />
           <Button
             type='button'
-            gradientDuoTone='purpleToBlue'
             size='sm'
             outline
             onClick={handleUpdloadImage}
@@ -154,13 +153,13 @@ function CreatePost() {
         <ReactQuill
           theme='snow'
           placeholder='Write something...'
-          className='h-72 mb-12'
+          className='h-72 mb-12 font-serif'
           required
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
         />
-        <Button type='submit' gradientDuoTone='purpleToPink'>
+        <Button type='submit' className="font-mono text-xl">
           Publish
         </Button>
         {publishError && (

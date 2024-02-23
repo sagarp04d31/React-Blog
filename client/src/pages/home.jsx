@@ -17,8 +17,8 @@ function Home() {
   return (
     <div className='flex flex-col mx-auto max-w-4xl my-5'>
       {posts && posts.length > 0 && (
-        <div className='flex flex-col gap-4'>
-          <div className='flex flex-wrap gap-4'>
+        <div className='flex flex-col gap-8'>
+          <div className='flex flex-wrap gap-8'>
             {posts.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
