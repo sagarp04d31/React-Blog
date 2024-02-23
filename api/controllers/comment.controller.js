@@ -1,4 +1,5 @@
 const Comment = require('../models/comment.models.js');
+const errorHandler = require('../utils/error.js');
 
 const createComment = async (req, res, next) => {
   try {

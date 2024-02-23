@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { IoMdSearch } from 'react-icons/io';
 import { Navbar, Button, Label, TextInput } from 'flowbite-react';
 
 function Register() {

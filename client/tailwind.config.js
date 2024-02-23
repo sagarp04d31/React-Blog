@@ -6,6 +6,9 @@ export default {
     'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
+    fontFamily: {
+      'text': ['Garamond', 'Mangal']
+    },
     extend: {},
   },
   plugins: [

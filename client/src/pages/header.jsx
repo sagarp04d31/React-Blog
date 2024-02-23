@@ -7,7 +7,6 @@ import {
 } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { IoMdSearch } from 'react-icons/io';
 import { toggleTheme } from '../redux/theme/themeSlice.js';
 import { signoutSuccess } from '../redux/user/userSlice.js';
 
@@ -34,25 +33,33 @@ function Header() {
   };
 
   return(
-    <Navbar className="border border-b-black">
+    <Navbar className="flex flex-row justify-between border border-b-black">
       <Link to="/">
         <span className="text-2xl font-mono hover:text-orange-500">
           Blogs
         </span>
       </Link>
-      <form className="flex flex-row">
-        <TextInput 
-          type="text"
-          placeholder='Search...'
-          rightIcon={IoMdSearch}
-        />
-      </form>
+      <div>
+      </div>
+      <div>
+      </div>
       <Button
         onClick={() => dispatch(toggleTheme())}
       >
-        { theme === 'light' ? "Light" : "Dark" }
+      { theme === 'light' ? 
+        (
+          <div className="rounded-full">
+            Light
+          </div>
+        ) : 
+        (
+          <div className="rounded-full">
+            Dark
+          </div>
+        ) 
+      }
       </Button>
-      {
+      { 
         currentUser ? 
         (
           <Dropdown
