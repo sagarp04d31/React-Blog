@@ -76,7 +76,7 @@ function DashComments() {
       {currentUser.isAdmin && comments.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
-            <Table.Head>
+            <Table.Head className='font-mono'>
               <Table.HeadCell>Date updated</Table.HeadCell>
               <Table.HeadCell>Comment content</Table.HeadCell>
               <Table.HeadCell>Number of likes</Table.HeadCell>
@@ -86,11 +86,11 @@ function DashComments() {
             </Table.Head>
             {comments.map((comment) => (
               <Table.Body className='divide-y' key={comment._id}>
-                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800 font-mono'>
                   <Table.Cell>
                     {new Date(comment.updatedAt).toLocaleDateString()}
                   </Table.Cell>
-                  <Table.Cell>{comment.content}</Table.Cell>
+                  <Table.Cell className="font-serif text-xl">{comment.content}</Table.Cell>
                   <Table.Cell>{comment.numberOfLikes}</Table.Cell>
                   <Table.Cell>{comment.postId}</Table.Cell>
                   <Table.Cell>{comment.userId}</Table.Cell>

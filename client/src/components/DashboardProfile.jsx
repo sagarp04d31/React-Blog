@@ -158,7 +158,7 @@ function DashProfile() {
   };
 
   return (
-    <div className='max-w-lg mx-auto p-3 w-full'>
+    <div className='max-w-lg mx-auto p-3 w-full font-serif'>
       <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
@@ -197,7 +197,7 @@ function DashProfile() {
           <img
             src={imageFileUrl || currentUser.profilePicture}
             alt='user'
-            className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
+            className={`rounded-full w-full h-full object-cover border-2 border-gray-200 ${
               imageFileUploadProgress &&
               imageFileUploadProgress < 100 &&
               'opacity-60'
@@ -230,8 +230,8 @@ function DashProfile() {
         />
         <Button
           type='submit'
-          gradientDuoTone='purpleToBlue'
           outline
+          className='font-mono'
           disabled={loading || imageFileUploading}
         >
           {loading ? 'Loading...' : 'Update'}
@@ -240,15 +240,14 @@ function DashProfile() {
           <Link to={'/create-post'}>
             <Button
               type='button'
-              gradientDuoTone='purpleToPink'
-              className='w-full'
+              className='w-full font-mono'
             >
               Create a post
             </Button>
           </Link>
         )}
       </form>
-      <div className='text-red-500 flex justify-between mt-5'>
+      <div className='text-red-500 flex text-md justify-between mt-5 font-mono'>
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>
           Delete Account
         </span>

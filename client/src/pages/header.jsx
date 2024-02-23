@@ -33,9 +33,9 @@ function Header() {
   };
 
   return(
-    <Navbar className="flex flex-row justify-between border border-b-black">
+    <Navbar className="flex flex-row justify-between border-b-2 dark:border-b dark:border-white border-black font-mono">
       <Link to="/">
-        <span className="text-2xl font-mono hover:text-orange-500">
+        <span className="text-2xl hover:text-orange-500">
           Blogs
         </span>
       </Link>
@@ -71,7 +71,7 @@ function Header() {
           >
 
             <Dropdown.Header>
-              <span> {currentUser.username} </span>
+              <span className="text-xl font-bold font-serif"> @{currentUser.username} </span>
             </Dropdown.Header>
             <Link to="/dashboard?tab=profile">
               <Dropdown.Item>
@@ -81,8 +81,6 @@ function Header() {
             <Dropdown.Item onClick={handleSignout}>
               Sign Out
             </Dropdown.Item>
-            <Dropdown.Divider />
-
           </Dropdown>
         ) :
         (

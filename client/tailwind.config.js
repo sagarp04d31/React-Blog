@@ -7,7 +7,8 @@ export default {
   ],
   theme: {
     fontFamily: {
-      'text': ['Garamond', 'Mangal']
+      'serif': ['Garamond', 'Mangal'],
+      'mono': ['JetBrains Mono'],
     },
     extend: {},
   },

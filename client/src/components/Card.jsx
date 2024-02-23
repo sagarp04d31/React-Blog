@@ -13,9 +13,9 @@ function PostCard({ post }) {
       <div className='flex flex-col'>
         <Link
           to={`/post/${post.slug}`}
-          className='text-white font-serif'
+          className='text-white'
         >
-          <p className=''>{post.title}</p>
+          <p className='font-serif'>{post.title}</p>
         </Link>
       </div>
     </div>

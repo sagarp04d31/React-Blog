@@ -13,6 +13,7 @@ function Home() {
     };
     fetchPosts();
   }, []);
+
   return (
     <div className='flex flex-col mx-auto max-w-4xl my-5'>
       {posts && posts.length > 0 && (
@@ -26,6 +27,7 @@ function Home() {
       )}
     </div>
   );
+
 }
 
 export default Home

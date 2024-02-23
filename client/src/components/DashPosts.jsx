@@ -52,7 +52,7 @@ function DashPosts() {
 
   return (
     <div 
-      className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'
+      className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500 font-mono'
       >
       { currentUser.isAdmin && userPosts.length > 0 ? (
         <>
@@ -61,7 +61,6 @@ function DashPosts() {
               <Table.HeadCell>Date updated</Table.HeadCell>
               <Table.HeadCell>Post image</Table.HeadCell>
               <Table.HeadCell>Post title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
               <Table.HeadCell>
                 <span>Edit</span>
@@ -84,13 +83,12 @@ function DashPosts() {
                   </Table.Cell>
                   <Table.Cell>
                     <Link
-                      className='font-medium text-gray-900 dark:text-white'
+                      className='font-medium font-serif text-xl text-gray-900 dark:text-white'
                       to={`/post/${post.slug}`}
                     >
                       {post.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.category}</Table.Cell>
                   <Table.Cell>
                     <span 
                       onClick={() => {
