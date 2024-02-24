@@ -6,7 +6,7 @@ const userRouter = require("./routers/user.router.js");
 const postRouter = require("./routers/post.router.js");
 const commentRouter = require("./routers/comment.route.js");
 const cookieParser = require('cookie-parser');
-import path from 'path';
+const path = require('path');
 
 const __dirname = path.resolve();
 
