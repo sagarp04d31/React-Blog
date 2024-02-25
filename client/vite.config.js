@@ -4,8 +4,9 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 // https://vitejs.dev/config/
+const port = process.env.PORT || 3000;
+
 export default defineConfig({
-  const port = process.env.PORT || 3000;
   server: {
     proxy: {
       "/api": {
