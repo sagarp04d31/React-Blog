@@ -6,7 +6,10 @@ const userRouter = require("./routers/user.router.js");
 const postRouter = require("./routers/post.router.js");
 const commentRouter = require("./routers/comment.route.js");
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
+dotenv.config();
 // const path = require('path');
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -36,5 +39,5 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, "0.0.0.0", () => {
   console.log("Server is Running");
-  console.log("http://localhost:3000")
+  console.log("http://0.0.0.0:3000")
 })
